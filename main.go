@@ -17,6 +17,18 @@ func name(c *gin.Context){
 	c.JSON(http.StatusOK, gin.H{"name":name, "age":12})
 }
 
+func post(c *gin.Context){
+	var json User
+	if c.BindJSON(&json) == nil {
+		fmt.Println(json)
+		Users = append(Users, json)
+		c.JSON(http.StatusOK, gin.H{"status": "added"})
+		fmt.Println(Users)
+	}else {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "error"})
+	}
+}
+
 func main(){
 	s := gin.Default()
 
@@ -27,6 +39,7 @@ func main(){
 	{
 		v1.GET("/ping", pingPong)
 		v1.GET("/user/:name", name)
+		v1.POST("/user", post)
 	}
 	s.Run("0.0.0.0:80")
 }
