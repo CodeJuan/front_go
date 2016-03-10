@@ -24,8 +24,8 @@ testApp.controller('getController', function($scope, $http) {
     $scope.data = [];
     $http.get('v1/user/' + '123')
         .success(function(result) {
-            $scope.datas = result.data
-            assert(result.data)
+            $scope.datas = result
+            assert(result)
         }
     );
 });
