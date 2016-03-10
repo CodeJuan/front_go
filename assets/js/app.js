@@ -6,7 +6,7 @@ var testApp = angular.module('testApp', ['ngRoute']);
 testApp.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'html/test.html',
+            templateUrl: 'assets/html/test.html',
             controller: 'testController'
         });
 });

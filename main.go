@@ -1,26 +1,24 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
-	"log"
+	_ "log"
+	"github.com/gin-gonic/gin"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
-}
-
-func createHandler() http.Handler {
-	var mux = http.NewServeMux()
-	var fileHandler = http.FileServer(http.Dir("./assets"))
-
-	mux.Handle("/", fileHandler)
-	return mux
+func pingPong(c *gin.Context){
+	c.JSON(200, gin.H{"message":"pong"})
 }
 
 func main(){
-	handler := createHandler()
-	if err := http.ListenAndServe("0.0.0.0:80", handler); err != nil {
-		log.Fatal(err)
+	s := gin.Default()
+
+	s.StaticFile("/", "./index.html")
+	s.StaticFS("/assets", http.Dir("./assets"))
+
+	v1 := s.Group("/v1")
+	{
+		v1.GET("/ping", pingPong)
 	}
+	s.Run("0.0.0.0:80")
 }
