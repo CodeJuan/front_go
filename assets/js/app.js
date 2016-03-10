@@ -28,4 +28,14 @@ testApp.controller('getController', function($scope, $http) {
             assert(result)
         }
     );
+
+    $scope.getdata = function() {
+        $scope.data = [];
+        $http.get('v1/user/' + $scope.input_name)
+            .success(function(result) {
+                $scope.datas = result
+                assert(result)
+            }
+        );
+    };
 });
