@@ -7,7 +7,12 @@ import (
 )
 
 func pingPong(c *gin.Context){
-	c.JSON(200, gin.H{"message":"pong"})
+	c.JSON(http.StatusOK, gin.H{"message":"pong"})
+}
+
+func name(c *gin.Context){
+	name := c.Param("name")
+	c.JSON(http.StatusOK, gin.H{"name":name, "age":12})
 }
 
 func main(){
@@ -19,6 +24,7 @@ func main(){
 	v1 := s.Group("/v1")
 	{
 		v1.GET("/ping", pingPong)
+		v1.GET("/user/:name", name)
 	}
 	s.Run("0.0.0.0:80")
 }
