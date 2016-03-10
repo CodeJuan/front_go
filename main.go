@@ -4,6 +4,7 @@ import (
 	"net/http"
 	_ "log"
 	"github.com/gin-gonic/gin"
+	"fmt"
 )
 
 func pingPong(c *gin.Context){
@@ -12,6 +13,7 @@ func pingPong(c *gin.Context){
 
 func name(c *gin.Context){
 	name := c.Param("name")
+	fmt.Println(name)
 	c.JSON(http.StatusOK, gin.H{"name":name, "age":12})
 }
 

@@ -19,6 +19,13 @@ testApp.controller('testController', function($scope) {
     $scope.pageClass = 'test';
 });
 
-testApp.controller('getController', function($scope) {
+testApp.controller('getController', function($scope, $http) {
     $scope.pageClass = 'get';
+    $scope.data = [];
+    $http.get('v1/user/' + '123')
+        .success(function(result) {
+            $scope.datas = result.data
+            assert(result.data)
+        }
+    );
 });
