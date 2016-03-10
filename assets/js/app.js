@@ -12,6 +12,10 @@ testApp.config(function($routeProvider) {
         .when('/get', {
             templateUrl: 'assets/html/get.html',
             controller: 'getController'
+        })
+        .when('/post', {
+            templateUrl: 'assets/html/post.html',
+            controller: 'postController'
         });
 });
 
@@ -38,4 +42,8 @@ testApp.controller('getController', function($scope, $http) {
             }
         );
     };
+});
+
+testApp.controller('postController', function($scope) {
+    $scope.pageClass = 'post';
 });
